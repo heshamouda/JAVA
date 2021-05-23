@@ -3,4 +3,6 @@
     <fullyQualifiedTypeName name="abs.figure.Figure"/>
     <fullyQualifiedTypeName name="abs.figures.Square"/>
     <fullyQualifiedTypeName name="java.awt.Rectangle"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Assertions"/>
+    <fullyQualifiedTypeName name="main.java.Person"/>
 </qualifiedTypeNameHistroy>
