@@ -1,4 +1,4 @@
-package ch.fhnw.oop2.exceptions.limit;
+package exceptions.limit;
 
 public class ATM {
 

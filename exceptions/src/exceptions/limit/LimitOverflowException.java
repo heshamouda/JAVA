@@ -1,10 +1,10 @@
-package ch.fhnw.oop2.exceptions.limit;
+package exceptions.limit;
 
 public class LimitOverflowException extends Exception {
 	
 	private double limit;
 
-	public LimitOverflowException() {
+	public LimitOverflowException() { //constructor
 		super();
 	}
 
@@ -22,7 +22,7 @@ public class LimitOverflowException extends Exception {
 	}
 	
 	@Override
-	public String getMessage() {
+	public String getMessage() { //overwriiten from Exception
 		return super.getMessage() + ": " + getLimit();
 	}
 

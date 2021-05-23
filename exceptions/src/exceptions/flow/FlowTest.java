@@ -1,4 +1,4 @@
-package ch.fhnw.oop2.exceptions.flow;
+package exceptions.flow;
 
 public class FlowTest {
 
