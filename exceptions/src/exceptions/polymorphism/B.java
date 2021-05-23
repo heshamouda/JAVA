@@ -1,8 +1,9 @@
-package ch.fhnw.oop2.exceptions.polymorphism;
+package exceptions.polymorphism;
 
 public class B extends A {
 
-	public void m()throws E1 {
+	public void m()throws E3
+	 {
 	}
 	
 	public void n() {

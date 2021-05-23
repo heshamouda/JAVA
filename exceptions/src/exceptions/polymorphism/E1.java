@@ -1,4 +1,4 @@
-package ch.fhnw.oop2.exceptions.polymorphism;
+package exceptions.polymorphism;
 
 public class E1 extends Exception {
 }
