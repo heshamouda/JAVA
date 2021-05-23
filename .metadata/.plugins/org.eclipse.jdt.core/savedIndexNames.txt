@@ -3,8 +3,12 @@ INDEX VERSION 1.131+D:\Java\OOP_JAVA\.metadata\.plugins\org.eclipse.jdt.core
 469792742.index
 226314166.index
 743266615.index
+<<<<<<< HEAD
 1287821738.index
 309870350.index
 3002367212.index
 3537603865.index
+=======
+309870350.index
+>>>>>>> Junit
 4183741895.index
