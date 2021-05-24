@@ -6,15 +6,15 @@
 	<artifactId>PersonTest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>15</maven.compiler.release>
-		
-        <!-- plugin versions -->
-        <maven-compiler.version>3.8.1</maven-compiler.version>
-        <maven-surefire.version>3.0.0-M5</maven-surefire.version>
-        <!-- dependency versions -->
-        <junit.jupiter.version>5.7.0</junit.jupiter.version>
-        
+
+		<!-- plugin versions -->
+		<maven-compiler.version>3.8.1</maven-compiler.version>
+		<maven-surefire.version>3.0.0-M5</maven-surefire.version>
+		<!-- dependency versions -->
+		<junit.jupiter.version>5.7.0</junit.jupiter.version>
+
 	</properties>
 	<build>
 		<plugins>
@@ -23,10 +23,17 @@
 				<version>${maven-compiler.version}</version>
 			</plugin>
 			<plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire.version}</version>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire.version}</version>
 			</plugin>
 		</plugins>
 	</build>
-
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.8.0-M1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
