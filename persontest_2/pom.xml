@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>PersonTest</groupId>
+	<artifactId>PersonTest</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.release>15</maven.compiler.release>
+		
+        <!-- plugin versions -->
+        <maven-compiler.version>3.8.1</maven-compiler.version>
+        <maven-surefire.version>3.0.0-M5</maven-surefire.version>
+        <!-- dependency versions -->
+        <junit.jupiter.version>5.7.0</junit.jupiter.version>
+        
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler.version}</version>
+			</plugin>
+			<plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
