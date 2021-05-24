@@ -1,0 +1,23 @@
+package main.java;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+ 
+class PersonTest {
+
+ 
+	@Test
+	void testBMI() {
+		//given
+		Person p = new Person(42,90,1.85);
+			
+		
+		//when
+		double bmi= p.getBMI();
+		
+		//then
+		assertEquals(26.3, bmi,0.01);
+	}
+	 
+
+}

@@ -1,0 +1,15 @@
+# Maven
+/target/
+
+# Eclipse settings
+/.settings/
+/bin/
+.project
+.classpath
+.checkstyle
+/dependency-reduced-pom.xml
+
+# IntelliJ
+/.idea/
+/out/
+*.iml
