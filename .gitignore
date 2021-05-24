@@ -27,6 +27,22 @@ hs_err_pid*
 # Maven
 /target/
 
+ Maven
+/target/
+
+#Eclipse
+.classpath
+.project
+.settings/
+/bin/
+
+#others
+*.zip
+/dependency-reduced-pom.xml
+
+#Logging
+/log/
+
 #Eclipse
 .classpath
 .project
