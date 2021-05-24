@@ -7,13 +7,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.release>15</maven.compiler.release>
+		<java.version>16</java.version>
 
 		<!-- plugin versions -->
 		<maven-compiler.version>3.8.1</maven-compiler.version>
 		<maven-surefire.version>3.0.0-M5</maven-surefire.version>
 		<!-- dependency versions -->
-		<junit.jupiter.version>5.7.0</junit.jupiter.version>
+		<junit.jupiter.version>5.8.0-M1</junit.jupiter.version>
 
 	</properties>
 	<build>
@@ -21,6 +21,10 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler.version}</version>
+				<configuration>
+				<source>${java.version}</source>
+				<target>${java.version}</target>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -32,7 +36,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.8.0-M1</version>
+			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
