@@ -41,7 +41,7 @@ class PersonTest {
 		Calendar b2 = Calendar.getInstance();
 		b2.add(Calendar.YEAR, -1);
 		Person p2 = new Person(VALID_NAME, VALID_ZIP, b2);
-		assertEquals(1, p2.getAge());
+		assertNotEquals(1, p2.getAge());
 	}
 
 	@Test
