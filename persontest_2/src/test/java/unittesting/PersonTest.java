@@ -10,39 +10,39 @@ import org.junit.jupiter.api.Test;
 class PersonTest {
 
 	// given
-	private String name = "Miller";
-	private int zip = 4000;
-	private Calendar birthdate = Calendar.getInstance();
+	private final static String VALID_NAME = "Miller";
+	private final static int VALID_ZIP = 4000;
+	private final Calendar VALID_BIRTHDATE = Calendar.getInstance();
 	private Person person;
 
 	@BeforeEach
 	void setup() {
 		//create person of age 50
-		birthdate.add(Calendar.YEAR, -50);
-		person = new Person(name, zip, birthdate);
+		VALID_BIRTHDATE.add(Calendar.YEAR, -50);
+		person = new Person(VALID_NAME, VALID_ZIP, VALID_BIRTHDATE);
 	}
 
 	@Test
 	void testValidPerson() {
 
 		// then
-		assertEquals(name, person.getName());
-		assertEquals(zip, person.getZip());
-		assertEquals(birthdate, person.getBirthdate());
+		assertEquals(VALID_NAME, person.getName());
+		assertEquals(VALID_ZIP, person.getZip());
+		assertEquals(VALID_BIRTHDATE, person.getBirthdate());
 	}
 
 	@Test
 	void testInvalidPerson() {
 		 
 		// test invalid name
-		assertThrows(IllegalArgumentException.class, () -> new Person(null, zip, birthdate));
+		assertThrows(IllegalArgumentException.class, () -> new Person(null, VALID_ZIP, VALID_BIRTHDATE));
 
 		// test invalid zip codes
-		assertThrows(IllegalArgumentException.class, () -> new Person(name, 100, birthdate));
-		assertThrows(IllegalArgumentException.class, () -> new Person(name, 10000, birthdate));
+		assertThrows(IllegalArgumentException.class, () -> new Person(VALID_NAME, 100, VALID_BIRTHDATE));
+		assertThrows(IllegalArgumentException.class, () -> new Person(VALID_NAME, 10000, VALID_BIRTHDATE));
 
 		// test invalid birthdate
-		assertThrows(IllegalArgumentException.class, () -> new Person(name, zip, null));
+		assertThrows(IllegalArgumentException.class, () -> new Person(VALID_NAME, VALID_ZIP, null));
 	}
 
 	@Test
@@ -51,7 +51,7 @@ class PersonTest {
 		
 		Calendar b2 = Calendar.getInstance();
 		b2.add(Calendar.YEAR, -1);	
-		Person p2 = new Person(name, zip, b2);			
+		Person p2 = new Person(VALID_NAME, VALID_ZIP, b2);			
 		assertEquals(1, p2.getAge());
 	}
 }
