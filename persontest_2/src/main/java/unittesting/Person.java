@@ -18,7 +18,13 @@ public class Person {
 		if (name == null || name.length() <= 1 || name.length() >= 30) {
 			throw new IllegalArgumentException("illegal name");
 		}
-
+		if (zip <1000 || zip > 9999) {
+			throw new IllegalArgumentException("Illegal ZIP code");
+		}
+		
+		if (birthdate == null) {
+			throw new IllegalArgumentException("Illegal birthdate");
+		}
 		this.name = name;
 		this.zip = zip;
 		this.birthdate = birthdate;

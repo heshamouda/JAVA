@@ -28,14 +28,23 @@ class PersonTest {
 	
 	@Test
 	void testInvalidPerson() {
-		
-		//given
-		int zip= 4000;
-		Calendar birthdate = Calendar.getInstance();
-		
+			
 		//when
+		//test invalid name
 		assertThrows(IllegalArgumentException.class,
 				()-> new Person(null, zip, birthdate));
-		//then
+		
+
+		//test invalid zip codes
+		assertThrows(IllegalArgumentException.class,
+				()-> new Person(name, 100, birthdate));
+		assertThrows(IllegalArgumentException.class,
+				()-> new Person(name, 10000, birthdate));
+
+		//test invalid birthdate
+		assertThrows(IllegalArgumentException.class,
+				()-> new Person(name, zip, null));		
 	}
+	
+	
 }
