@@ -32,8 +32,6 @@ class PersonTest {
 		assertEquals(VALID_NAME, person.getName());
 		assertEquals(VALID_ZIP, person.getZip());
 		assertEquals(VALID_BIRTHDATE, person.getBirthdate());
-
-		assertEquals(AGE, person.getAge());
 	}
 
 	@Test
