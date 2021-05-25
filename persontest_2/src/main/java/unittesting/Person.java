@@ -55,7 +55,7 @@ public class Person {
 
 		// check if birthday has been celebrated this year
 		if(today.get(Calendar.DAY_OF_YEAR) < birthdate.get(Calendar.DAY_OF_YEAR)) {
-			factor = -1; //birthday not celebrated
+			//factor = -1; //birthday not celebrated
 		}
 		return today.get(Calendar.YEAR) - birthdate.get(Calendar.YEAR) + factor;
 	}
