@@ -7,6 +7,9 @@ public class Person {
 	private int zip;
 	private final Calendar birthdate;
 
+		public static final String EXC_MSG_ILLEGAL_NAME ="illegal name";
+		public static final String EXC_MSG_ILLEGAL_ZIP ="illegal ZIP code";
+		public static final String EXC_MSG_ILLEGAL_BIRTHDATE ="illegal birthdate";
 	/**
 	 * A person is distinguished by his/her name, postal code and birth date.
 	 * @param name Name of person, must not be null nor empty nor longer than 30 characters.
@@ -16,18 +19,21 @@ public class Person {
 	 */
 	public Person(String name, int zip, Calendar birthdate) {
 		if (name == null || name.length() <= 1 || name.length() >= 30) {
-			throw new IllegalArgumentException("illegal name");
+			throw new IllegalArgumentException(EXC_MSG_ILLEGAL_NAME);
 		}
 		if (zip <1000 || zip > 9999) {
-			throw new IllegalArgumentException("Illegal ZIP code");
+			throw new IllegalArgumentException(EXC_MSG_ILLEGAL_ZIP);
 		}
 		
-		if (birthdate == null) {
-			throw new IllegalArgumentException("Illegal birthdate");
+		//birthdate not be null , nor in the future
+		if (birthdate == null || birthdate.after(Calendar.getInstance())) {
+			throw new IllegalArgumentException(EXC_MSG_ILLEGAL_BIRTHDATE);
 		}
 		this.name = name;
 		this.zip = zip;
-		this.birthdate = birthdate;
+		
+		//make the birthdate immutable
+		this.birthdate = (Calendar)birthdate.clone();
 	}
 		
 	/**
@@ -43,7 +49,7 @@ public class Person {
 	/**
 	 * @return the person's birth date, never null, not in the future.
 	 */
-	public Calendar getBirthdate() { return birthdate; }
+	public Calendar getBirthdate() { return (Calendar) birthdate.clone(); }
 	
 	/**
 	 * @return the person's age, never negative
