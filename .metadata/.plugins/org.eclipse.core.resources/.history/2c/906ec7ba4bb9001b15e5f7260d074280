@@ -1,0 +1,5 @@
+package abs.figure;
+
+public abstract class Figure {
+
+}
