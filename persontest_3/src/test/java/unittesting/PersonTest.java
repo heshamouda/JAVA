@@ -6,6 +6,8 @@ import java.util.Calendar;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class PersonTest {
 
@@ -55,6 +57,15 @@ class PersonTest {
 		assertThrows(IllegalArgumentException.class, () -> new Person(null, VALID_ZIP, VALID_BIRTHDATE));
 
 	}
+	
+	@ParameterizedTest
+	@ValueSource(ints = {1000, 1001, 5042, 9998, 9999})
+	void testPersonConstrWithValidZi(int zip) {
+		// test zip code
+		person = new Person(VALID_NAME, zip, VALID_BIRTHDATE);
+		assertEquals(zip, person.getZip());
+
+	} 
 
 	@Test
 	void testPersonWithInvalidZip() {
