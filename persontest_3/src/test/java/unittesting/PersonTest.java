@@ -3,11 +3,15 @@ package unittesting;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Calendar;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class PersonTest {
@@ -30,7 +34,6 @@ class PersonTest {
 
 	@Test
 	void testValidPersonData() {
-
 		// then
 		assertEquals(VALID_NAME, person.getName());
 		assertEquals(VALID_ZIP, person.getZip());
@@ -91,6 +94,42 @@ class PersonTest {
 		assertThrows(IllegalArgumentException.class, () -> new Person(VALID_NAME, zip, VALID_BIRTHDATE));
 	}
 
+	@ParameterizedTest
+	@MethodSource("createValidBirthdates")
+	void testPersonConstrWithValidBirthdate(Calendar birthdate) {
+		// test birthdate
+		person = new Person(VALID_NAME, VALID_ZIP, birthdate);
+		assertEquals(birthdate, person.getBirthdate());
+	}
+
+	static Stream<Arguments> createValidBirthdates() {
+		var now = Calendar.getInstance();
+		var dayBefore = (Calendar) now.clone();
+		dayBefore.add(Calendar.DAY_OF_YEAR, -1);
+		var adultPerson = (Calendar) now.clone();
+		adultPerson.add(Calendar.YEAR, -23);
+
+		return Stream.of(Arguments.of(now), Arguments.of(dayBefore), Arguments.of(adultPerson));
+	}
+
+	@ParameterizedTest
+	@NullSource
+	@MethodSource("createInvalidBirthdates")
+	void testPersonConstrWithInvalidBirthdate(Calendar birthdate) {
+		// test birthdate
+		assertThrows(IllegalArgumentException.class, () -> new Person(VALID_NAME, VALID_ZIP, birthdate));
+	}
+
+	static Stream<Arguments> createInvalidBirthdates() {
+		var now = Calendar.getInstance();
+		var dayAfter = (Calendar) now.clone();
+		dayAfter.add(Calendar.DAY_OF_YEAR, 1);
+		var dayInTheFuture = (Calendar) now.clone();
+		dayInTheFuture.add(Calendar.YEAR, 23);
+
+		return Stream.of(Arguments.of(dayAfter), Arguments.of(dayInTheFuture));
+	}
+
 	@Test
 	void testPersonWithInvalidBirthdate() {
 		// test invalid birthdate
@@ -133,7 +172,5 @@ class PersonTest {
 
 		// the birthdate in the person must still be unchanged.
 		assertNotEquals(birthdate, person.getBirthdate());
-
 	}
-
 }
