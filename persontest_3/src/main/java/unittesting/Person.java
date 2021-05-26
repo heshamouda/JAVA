@@ -9,6 +9,10 @@ public class Person {
 
 	public static final int MIN_ZIP = 1000;	
 	public static final int MAX_ZIP= 9999;
+	
+	public static final int MIN_NAME_LEN = 1;	
+	public static final int MAX_NAME_LEN= 30;
+	
 	public static final String EXC_MSG_ILLEGAL_NAME = "illegal name";
 	public static final String EXC_MSG_ILLEGAL_ZIP = "illegal ZIP code";
 	public static final String EXC_MSG_ILLEGAL_BIRTHDATE = "illegal birthdate";
@@ -23,7 +27,7 @@ public class Person {
 	 * @throws java.lang.IllegalArgumentException
 	 */
 	public Person(String name, int zip, Calendar birthdate) {
-		if (name == null || name.length() <= 1 || name.length() >= 30) {
+		if (name == null || name.length() < MIN_NAME_LEN || name.length() > MAX_NAME_LEN) {
 			throw new IllegalArgumentException(EXC_MSG_ILLEGAL_NAME);
 		}
 		if ((zip < MIN_ZIP )|| (zip > MAX_ZIP)) {

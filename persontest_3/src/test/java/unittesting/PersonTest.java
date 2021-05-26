@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Calendar;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -46,40 +47,49 @@ class PersonTest {
 		assertNotEquals(1, p2.getAge());
 	}
 
-	
-	@Test
-	void testPersonWithInvalidName() {
+	@ParameterizedTest
+	@ValueSource(ints = { Person.MIN_NAME_LEN, (Person.MIN_NAME_LEN + Person.MAX_NAME_LEN) / 2, Person.MAX_NAME_LEN })
+	void testPersonConstrWithValidName(int len) {
+		// test name
+		var name = StringUtils.repeat("a", len);
+		person = new Person(name, VALID_ZIP, VALID_BIRTHDATE);
+		assertEquals(name, person.getName());
+	}
 
+	@ParameterizedTest
+	@ValueSource(ints = { Person.MIN_NAME_LEN - 1, (Person.MIN_NAME_LEN * Person.MAX_NAME_LEN) * 2,
+			Person.MAX_NAME_LEN + 1, Person.MAX_NAME_LEN + 100 })
+	void testPersonConstrWithInvalidName(int len) {
+		// test invalid name
+		var name = StringUtils.repeat("a", len);
+		assertThrows(IllegalArgumentException.class, () -> new Person(name, VALID_ZIP, VALID_BIRTHDATE));
+
+	}
+
+	@Test
+	void testPersonCondtrWithNullName() {
 		// test invalid name: for null or empty name
 		Throwable result = assertThrows(IllegalArgumentException.class,
 				() -> new Person(null, VALID_ZIP, VALID_BIRTHDATE));
 		assertEquals(Person.EXC_MSG_ILLEGAL_NAME, result.getMessage());
-		assertThrows(IllegalArgumentException.class, () -> new Person(null, VALID_ZIP, VALID_BIRTHDATE));
-
 	}
-	
+
 	@ParameterizedTest
-	@ValueSource(ints = {Person.MIN_ZIP,
-						 Person.MIN_ZIP+1, 
-						 (Person.MIN_ZIP+Person.MAX_ZIP)/2, 
-						 Person.MAX_ZIP-1, 
-						 Person.MAX_ZIP})
-	void testPersonConstrWithValidZi(int zip) {
-		// test zip code
+	@ValueSource(ints = { Person.MIN_ZIP, Person.MIN_ZIP + 1, (Person.MIN_ZIP + Person.MAX_ZIP) / 2, Person.MAX_ZIP - 1,
+			Person.MAX_ZIP })
+	void testPersonConstrWithValidZip(int zip) {
+		// test zip code values
 		person = new Person(VALID_NAME, zip, VALID_BIRTHDATE);
 		assertEquals(zip, person.getZip());
-	} 
+	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {Person.MIN_ZIP-1,
-						 Person.MIN_ZIP-1000, 
-						 (-Person.MIN_ZIP-Person.MAX_ZIP)/2, 
-						 Person.MAX_ZIP+1, 
-						 Person.MAX_ZIP+1000})
-	void testPersonConstrWithInvalidZi(int zip) {
-		// test zip code		 
+	@ValueSource(ints = { Person.MIN_ZIP - 1, Person.MIN_ZIP - 1000, (-Person.MIN_ZIP - Person.MAX_ZIP) / 2,
+			Person.MAX_ZIP + 1, Person.MAX_ZIP + 1000 })
+	void testPersonConstrWithInvalidZip(int zip) {
+		// test zip code
 		assertThrows(IllegalArgumentException.class, () -> new Person(VALID_NAME, zip, VALID_BIRTHDATE));
-	} 	
+	}
 
 	@Test
 	void testPersonWithInvalidBirthdate() {
