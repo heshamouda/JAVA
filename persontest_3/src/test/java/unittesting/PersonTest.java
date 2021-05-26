@@ -68,15 +68,18 @@ class PersonTest {
 		// test zip code
 		person = new Person(VALID_NAME, zip, VALID_BIRTHDATE);
 		assertEquals(zip, person.getZip());
-
 	} 
 
-	@Test
-	void testPersonWithInvalidZip() {
-		// test for valid zip codes
-		assertThrows(IllegalArgumentException.class, () -> new Person(VALID_NAME, 100, VALID_BIRTHDATE));
-		assertThrows(IllegalArgumentException.class, () -> new Person(VALID_NAME, 10000, VALID_BIRTHDATE));
-	}
+	@ParameterizedTest
+	@ValueSource(ints = {Person.MIN_ZIP-1,
+						 Person.MIN_ZIP-1000, 
+						 (-Person.MIN_ZIP-Person.MAX_ZIP)/2, 
+						 Person.MAX_ZIP+1, 
+						 Person.MAX_ZIP+1000})
+	void testPersonConstrWithInvalidZi(int zip) {
+		// test zip code		 
+		assertThrows(IllegalArgumentException.class, () -> new Person(VALID_NAME, zip, VALID_BIRTHDATE));
+	} 	
 
 	@Test
 	void testPersonWithInvalidBirthdate() {
