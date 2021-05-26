@@ -1,0 +1,52 @@
+package main.java;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+ 
+/**
+ * @author Hesham Ouda
+ */
+
+class PersonTest {
+	@Test
+	void testInit() {
+		//given
+		int age = 50;
+		double weight = 90;
+		double height = 1.85;
+		
+		//when
+		Person person = new Person(age, weight, height);
+		
+//		then
+		assertEquals(age, person.getAge());
+		assertEquals(weight,person.getWeight());
+		assertEquals(height, person.getHeight());
+	}
+	
+	
+ 
+	@Test
+	void testBMI() {
+		//given
+		Person p = new Person(42,90,1.85);
+			
+		
+		//when
+		double bmi= p.getBMI();
+		
+		//then
+		assertEquals(26.3, bmi,0.01);
+	}
+	
+	@Test
+	void testInitFriends() {
+		//given
+		Person p = new Person(42,90,1.85);
+		
+		//when
+		 int numberOfFriends = p.numberOfFriends();
+		 
+		 //then
+		 assertEquals(0, numberOfFriends);
+	}
+}
