@@ -7,6 +7,8 @@ public class Person {
 	private int zip;
 	private final Calendar birthdate;
 
+	public static final int MIN_ZIP = 1000;	
+	public static final int MAX_ZIP= 9999;
 	public static final String EXC_MSG_ILLEGAL_NAME = "illegal name";
 	public static final String EXC_MSG_ILLEGAL_ZIP = "illegal ZIP code";
 	public static final String EXC_MSG_ILLEGAL_BIRTHDATE = "illegal birthdate";
@@ -24,7 +26,7 @@ public class Person {
 		if (name == null || name.length() <= 1 || name.length() >= 30) {
 			throw new IllegalArgumentException(EXC_MSG_ILLEGAL_NAME);
 		}
-		if (zip < 1000 || zip > 9999) {
+		if ((zip < MIN_ZIP )|| (zip > MAX_ZIP)) {
 			throw new IllegalArgumentException(EXC_MSG_ILLEGAL_ZIP);
 		} // birthdate not be null , nor in the future
 		if (birthdate == null || birthdate.after(Calendar.getInstance())) {

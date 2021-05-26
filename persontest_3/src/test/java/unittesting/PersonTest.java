@@ -59,7 +59,11 @@ class PersonTest {
 	}
 	
 	@ParameterizedTest
-	@ValueSource(ints = {1000, 1001, 5042, 9998, 9999})
+	@ValueSource(ints = {Person.MIN_ZIP,
+						 Person.MIN_ZIP+1, 
+						 (Person.MIN_ZIP+Person.MAX_ZIP)/2, 
+						 Person.MAX_ZIP-1, 
+						 Person.MAX_ZIP})
 	void testPersonConstrWithValidZi(int zip) {
 		// test zip code
 		person = new Person(VALID_NAME, zip, VALID_BIRTHDATE);
