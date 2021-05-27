@@ -9,4 +9,6 @@
     <fullyQualifiedTypeName name="main.java.Person"/>
     <fullyQualifiedTypeName name="org.junit.Test"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="ch.fhnw.cs.swc.jukebox.Song"/>
 </qualifiedTypeNameHistroy>

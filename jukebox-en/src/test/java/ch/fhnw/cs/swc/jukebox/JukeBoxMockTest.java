@@ -1,13 +1,15 @@
 package ch.fhnw.cs.swc.jukebox;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class JukeBoxStubTest {
+class JukeBoxMockTest {
 
 	protected static String songTitle = "Icebreaker";
 	protected JukeBox jukeBox;
@@ -15,8 +17,7 @@ class JukeBoxStubTest {
 
 	@BeforeEach
 	public void setUp() {
-		song = new SongStub(songTitle);
-		jukeBox = new MusicJukeBox();
+		 jukeBox = new MusicJukeBox();
 	}
 
 	/*
@@ -35,17 +36,17 @@ class JukeBoxStubTest {
 	 */
 	@Test
 	public void testGetPlayList() {
-		jukeBox.addSong(song);
+		Song song = mock(Song.class);	
+		when(song.getTitle()).thenReturn(songTitle);
+		jukeBox.addSong(song);		
+	
 		List<Song> list = jukeBox.getPlayList();
-
 		assertEquals(1, list.size());
 		assertTrue(list.contains(song));
 
 		// add a second song and test for correct play list
-		//two options: either use second dumb stub class
-		//Song song2 = new SongStub2("Hello Kitty")
-		//or extend stub implementation, that stores title.
-		Song song2 = new SongStub2("Hello Kitty");
+		Song song2 = mock(Song.class);
+		when(song2.getTitle()).thenReturn("Hello Kitty");
 		jukeBox.addSong(song2);
 		list = jukeBox.getPlayList();
 
