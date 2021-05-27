@@ -23,8 +23,8 @@ target/**
 
 # eclipse specific
 *.pydevproject
-.project
-.metadata
+.metadata/
+/.metadata/
 bin/**
 tmp/**
 tmp/**/*
@@ -44,6 +44,10 @@ local.properties
 .settings/
 .classpath
 .project 
+/.settings/
+/bin/
+.checkstyle
+/dependency-reduced-pom.xml
 
 # External tool builders
 .externalToolBuilders/
