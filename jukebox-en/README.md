@@ -73,7 +73,7 @@ You will use the Mockito-Framework for the mock-testing. First you have to inclu
    How do you assure, that the MusicJukeBox is calling the Song objects in the correct order? I.e. that getTitle() is called before start() is called? 
 5. Now implement a new test testActualSong-method in which you create a Song mock object. Test if the expected calls occur as follows:
 
-When the method playTitle() is called on a MusicJukeBox, we expect that it looks for the Song object and starts it when found. This means, we expect at least one call of the method start().
+When the method playSong() is called on a MusicJukeBox, we expect that it looks for the Song object and starts it when found. This means, we expect at least one call of the method start().
 
 ## Task 3 - class design for test isolation<a name="task3"></a>
 

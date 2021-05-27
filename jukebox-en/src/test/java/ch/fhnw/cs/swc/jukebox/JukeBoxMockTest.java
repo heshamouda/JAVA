@@ -8,6 +8,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.atLeastOnce;
 
 import java.util.List;
 
@@ -82,10 +83,7 @@ class JukeBoxMockTest {
 		// I.e. that getTitle() is called before start() is called
 		InOrder  inorder = inOrder(song);
 		inorder.verify(song).getTitle();
-		inorder.verify(song).start();
-		
-		
-		
+		inorder.verify(song).start();		
 	}
 
 	/*
@@ -121,6 +119,22 @@ class JukeBoxMockTest {
 		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
 		verify(song, times(2)).start();
 		verify(song, times(1)).getTitle();
+	}
+	
+	/**
+	 * When the method playSong() is called on a MusicJukeBox, 
+	 * we expect that it looks for the Song object and starts it when found. 
+	 * This means, we expect at least one call of the method start().	
+	 */
+	@Test
+	public void testActualSong() {
+		jukeBox.playSong(songTitle);
+		
+		assertEquals(songTitle, jukeBox.getCurrentSong().getTitle());
+		//verify(song, times(1)).start(); can be also used but with one time no need to times()
+		verify(song).start();
+		verify(song, atLeastOnce()).start();
+		
 	}
 
 }
