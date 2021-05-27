@@ -1,20 +1,31 @@
-# Compiled class file
-*.class
-
-# Log file
-*.log
-
 # Maven
 /target/
 
 #Eclipse
+/workspace
 .classpath
 .project
 .settings/
 /bin/
+.bin
+.plugins
+*.metadata/
+.metadata/
+/.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.recommenders
 
 #others
 *.zip
 /dependency-reduced-pom.xml
 
+#log
+.log
 

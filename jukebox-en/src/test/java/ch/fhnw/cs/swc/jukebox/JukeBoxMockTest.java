@@ -1,13 +1,16 @@
 package ch.fhnw.cs.swc.jukebox;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.doNothing;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class JukeBoxStubTest {
+class JukeBoxMockTest {
 
 	protected static String songTitle = "Icebreaker";
 	protected JukeBox jukeBox;
@@ -15,8 +18,7 @@ class JukeBoxStubTest {
 
 	@BeforeEach
 	public void setUp() {
-		song = new SongStub(songTitle);
-		jukeBox = new MusicJukeBox();
+		 jukeBox = new MusicJukeBox();
 	}
 
 	/*
@@ -35,17 +37,17 @@ class JukeBoxStubTest {
 	 */
 	@Test
 	public void testGetPlayList() {
-		jukeBox.addSong(song);
+		Song song = mock(Song.class);	
+		when(song.getTitle()).thenReturn(songTitle);
+		jukeBox.addSong(song);		
+	
 		List<Song> list = jukeBox.getPlayList();
-
 		assertEquals(1, list.size());
 		assertTrue(list.contains(song));
 
 		// add a second song and test for correct play list
-		//two options: either use second dumb stub class
-		//Song song2 = new SongStub2("Hello Kitty")
-		//or extend stub implementation, that stores title.
-		Song song2 = new SongStub2("Hello Kitty");
+		Song song2 = mock(Song.class);
+		when(song2.getTitle()).thenReturn("Hello Kitty");
 		jukeBox.addSong(song2);
 		list = jukeBox.getPlayList();
 
@@ -59,6 +61,10 @@ class JukeBoxStubTest {
 	 */
 	@Test
 	public void testPlaySong() {
+		Song song = mock(Song.class);	
+		when(song.getTitle()).thenReturn(songTitle);
+		//the default value is false, so we should force true.
+		when(song.isPlaying()).thenReturn(true);
 		jukeBox.addSong(song);
 		jukeBox.playSong(songTitle);
 		Song mySong = jukeBox.getCurrentSong();
@@ -71,8 +77,11 @@ class JukeBoxStubTest {
 	 * The second start of the already playing song
 	 * should generate an exception caused by the Song class. 
 	 */
-	@Test
+	
 	public void testPlayOfAlreadyPlayingSong() {
+		Song song = mock(Song.class);	
+		when(song.getTitle()).thenReturn(songTitle);
+		
 		jukeBox.addSong(song);
 
 		// play song; should not generate any exception
@@ -82,6 +91,26 @@ class JukeBoxStubTest {
 			fail("no exception expected at first call of playTitle");
 		}
 
+		doThrow(new JukeBoxException("is already playing")).when(song).start();
+		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
+	}
+
+	@Test
+	public void testPlayOfAlreadyPlayingSongWithMockChaining() {
+		Song song = mock(Song.class);	
+		when(song.getTitle()).thenReturn(songTitle);
+		
+		jukeBox.addSong(song);
+		
+		doNothing()
+		.doThrow(new JukeBoxException("is already playing")).when(song).start();
+		// play song; should not generate any exception
+		try {
+			jukeBox.playSong(songTitle);
+		} catch (JukeBoxException e) {
+			fail("no exception expected at first call of playTitle");
+		}
+	
 		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
 	}
 

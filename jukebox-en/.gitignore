@@ -7,12 +7,35 @@
 .project
 .classpath
 .checkstyle
+.settings/
 /dependency-reduced-pom.xml
+ 
+# eclipse specific
+*.pydevproject
+.metadata
+/.metadata/
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+bin/
+tmp/
+local.properties
+.recommenders
 
-# IntelliJ
-/.idea/
-/out/
-*.iml
+# External tool builders
+.externalToolBuilders/
 
-# VS Code settings
-.vscode/settings.json
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# Misc
+*.swp
+release.properties
+pom.xml.releaseBackup
+pom.xml.tag
