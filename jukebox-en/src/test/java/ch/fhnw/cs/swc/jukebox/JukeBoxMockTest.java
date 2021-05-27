@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doThrow;
-
+import static org.mockito.Mockito.doNothing;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -77,7 +77,7 @@ class JukeBoxMockTest {
 	 * The second start of the already playing song
 	 * should generate an exception caused by the Song class. 
 	 */
-	@Test
+	
 	public void testPlayOfAlreadyPlayingSong() {
 		Song song = mock(Song.class);	
 		when(song.getTitle()).thenReturn(songTitle);
@@ -92,6 +92,25 @@ class JukeBoxMockTest {
 		}
 
 		doThrow(new JukeBoxException("is already playing")).when(song).start();
+		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
+	}
+
+	@Test
+	public void testPlayOfAlreadyPlayingSongWithMockChaining() {
+		Song song = mock(Song.class);	
+		when(song.getTitle()).thenReturn(songTitle);
+		
+		jukeBox.addSong(song);
+		
+		doNothing()
+		.doThrow(new JukeBoxException("is already playing")).when(song).start();
+		// play song; should not generate any exception
+		try {
+			jukeBox.playSong(songTitle);
+		} catch (JukeBoxException e) {
+			fail("no exception expected at first call of playTitle");
+		}
+	
 		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
 	}
 
