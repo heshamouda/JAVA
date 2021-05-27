@@ -18,7 +18,14 @@ class JukeBoxMockTest {
 
 	@BeforeEach
 	public void setUp() {
-		 jukeBox = new MusicJukeBox();
+		jukeBox = new MusicJukeBox();
+
+		// specify a default song, that is used in all tests
+		song = mock(Song.class);
+		when(song.getTitle()).thenReturn(songTitle);
+
+		// add at least the default song to the jukebox
+		jukeBox.addSong(song);
 	}
 
 	/*
@@ -37,15 +44,13 @@ class JukeBoxMockTest {
 	 */
 	@Test
 	public void testGetPlayList() {
-		Song song = mock(Song.class);	
-		when(song.getTitle()).thenReturn(songTitle);
-		jukeBox.addSong(song);		
-	
+
 		List<Song> list = jukeBox.getPlayList();
 		assertEquals(1, list.size());
 		assertTrue(list.contains(song));
 
 		// add a second song and test for correct play list
+
 		Song song2 = mock(Song.class);
 		when(song2.getTitle()).thenReturn("Hello Kitty");
 		jukeBox.addSong(song2);
@@ -61,28 +66,35 @@ class JukeBoxMockTest {
 	 */
 	@Test
 	public void testPlaySong() {
-		Song song = mock(Song.class);	
-		when(song.getTitle()).thenReturn(songTitle);
-		//the default value is false, so we should force true.
+		// the default value is false, add extra behavior to the default song
 		when(song.isPlaying()).thenReturn(true);
-		jukeBox.addSong(song);
+
 		jukeBox.playSong(songTitle);
 		Song mySong = jukeBox.getCurrentSong();
 		assertTrue(mySong.isPlaying());
 	}
 
-	/*
-	 * testPlayOfAlreadyPlayingSong adds a new song to the MusicJukeBox 
-	 * and tries to start the song two times. 
-	 * The second start of the already playing song
-	 * should generate an exception caused by the Song class. 
-	 */
+	@Test
+	public void testPlayOfAlreadyPlayingSongWithMockChaining() {
+
+		doNothing().doThrow(new JukeBoxException("is already playing")).when(song).start();
+		// play song; should not generate any exception
+		try {
+			jukeBox.playSong(songTitle);
+		} catch (JukeBoxException e) {
+			fail("no exception expected at first call of playTitle");
+		}
+
+		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
+	} 
 	
+	/*
+	 * testPlayOfAlreadyPlayingSong adds a new song to the MusicJukeBox and tries to
+	 * start the song two times. The second start of the already playing song should
+	 * generate an exception caused by the Song class.
+	 */
+	@Test
 	public void testPlayOfAlreadyPlayingSong() {
-		Song song = mock(Song.class);	
-		when(song.getTitle()).thenReturn(songTitle);
-		
-		jukeBox.addSong(song);
 
 		// play song; should not generate any exception
 		try {
@@ -95,23 +107,6 @@ class JukeBoxMockTest {
 		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
 	}
 
-	@Test
-	public void testPlayOfAlreadyPlayingSongWithMockChaining() {
-		Song song = mock(Song.class);	
-		when(song.getTitle()).thenReturn(songTitle);
-		
-		jukeBox.addSong(song);
-		
-		doNothing()
-		.doThrow(new JukeBoxException("is already playing")).when(song).start();
-		// play song; should not generate any exception
-		try {
-			jukeBox.playSong(songTitle);
-		} catch (JukeBoxException e) {
-			fail("no exception expected at first call of playTitle");
-		}
-	
-		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
-	}
+
 
 }
