@@ -3,6 +3,7 @@ package ch.fhnw.cs.swc.jukebox;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doThrow;
 
 import java.util.List;
 
@@ -60,6 +61,10 @@ class JukeBoxMockTest {
 	 */
 	@Test
 	public void testPlaySong() {
+		Song song = mock(Song.class);	
+		when(song.getTitle()).thenReturn(songTitle);
+		//the default value is false, so we should force true.
+		when(song.isPlaying()).thenReturn(true);
 		jukeBox.addSong(song);
 		jukeBox.playSong(songTitle);
 		Song mySong = jukeBox.getCurrentSong();
@@ -74,6 +79,9 @@ class JukeBoxMockTest {
 	 */
 	@Test
 	public void testPlayOfAlreadyPlayingSong() {
+		Song song = mock(Song.class);	
+		when(song.getTitle()).thenReturn(songTitle);
+		
 		jukeBox.addSong(song);
 
 		// play song; should not generate any exception
@@ -83,6 +91,7 @@ class JukeBoxMockTest {
 			fail("no exception expected at first call of playTitle");
 		}
 
+		doThrow(new JukeBoxException("is already playing")).when(song).start();
 		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
 	}
 

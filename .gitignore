@@ -1,62 +1,31 @@
-# Binaries
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-*.war
-*.ear
-*.sar
+# Maven
+/target/
 
-# Maven 
-target/
-
-# Java related
-target/**
-*.jar
-*.war
-*.ear
-*.class
-
-# eclipse specific
-*.pydevproject
+#Eclipse
+/workspace
+.classpath
+.project
+.settings/
+/bin/
+.bin
+.plugins
+*.metadata/
 .metadata/
 /.metadata/
-bin/**
-tmp/**
-tmp/**/*
+bin/
+tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
 .loadpath
-bin/
-tmp/
-local.properties
 .recommenders
 
-
-# eclipse project file
-.settings/
-.classpath
-.project 
-/.settings/
-/bin/
-.checkstyle
+#others
+*.zip
 /dependency-reduced-pom.xml
 
-# External tool builders
-.externalToolBuilders/
+#log
+.log
 
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# Misc
-*.swp
-release.properties
-pom.xml.releaseBackup
-pom.xml.tag
