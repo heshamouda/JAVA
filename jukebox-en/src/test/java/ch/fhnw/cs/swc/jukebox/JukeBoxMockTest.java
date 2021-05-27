@@ -5,10 +5,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.inOrder;
+
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
 
 class JukeBoxMockTest {
 
@@ -72,22 +77,17 @@ class JukeBoxMockTest {
 		jukeBox.playSong(songTitle);
 		Song mySong = jukeBox.getCurrentSong();
 		assertTrue(mySong.isPlaying());
+		
+		// assure, that the MusicJukeBox is calling the Song objects in the correct order.
+		// I.e. that getTitle() is called before start() is called
+		InOrder  inorder = inOrder(song);
+		inorder.verify(song).getTitle();
+		inorder.verify(song).start();
+		
+		
+		
 	}
 
-	@Test
-	public void testPlayOfAlreadyPlayingSongWithMockChaining() {
-
-		doNothing().doThrow(new JukeBoxException("is already playing")).when(song).start();
-		// play song; should not generate any exception
-		try {
-			jukeBox.playSong(songTitle);
-		} catch (JukeBoxException e) {
-			fail("no exception expected at first call of playTitle");
-		}
-
-		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
-	} 
-	
 	/*
 	 * testPlayOfAlreadyPlayingSong adds a new song to the MusicJukeBox and tries to
 	 * start the song two times. The second start of the already playing song should
@@ -107,6 +107,20 @@ class JukeBoxMockTest {
 		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
 	}
 
+	@Test
+	public void testPlayOfAlreadyPlayingSongWithMockChaining() {
 
+		doNothing().doThrow(new JukeBoxException("is already playing")).when(song).start();
+		// play song; should not generate any exception
+		try {
+			jukeBox.playSong(songTitle);
+		} catch (JukeBoxException e) {
+			fail("no exception expected at first call of playTitle");
+		}
+
+		assertThrows(JukeBoxException.class, () -> jukeBox.playSong(songTitle));
+		verify(song, times(2)).start();
+		verify(song, times(1)).getTitle();
+	}
 
 }
