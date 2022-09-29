@@ -1,5 +1,6 @@
 {
     "java.project.sourcePaths": [
-        ".metadata/diff. projects/person"
+        ".metadata/diff. projects/person",
+        "oop2"
     ]
 }
