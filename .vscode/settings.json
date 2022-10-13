@@ -1,6 +1,6 @@
 {
-    "java.project.sourcePaths": [
-        ".metadata/diff. projects/person",
-        "oop2"
-    ]
+  "java.project.sourcePaths": [
+    ".metadata/diff. projects/person",
+    "JavaFX/sample"
+  ]
 }
