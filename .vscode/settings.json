@@ -1,8 +1,5 @@
 {
-  "java.project.sourcePaths": [
-    ".metadata/diff. projects/person",
-    "JavaFX/sample"
-  ],
+  "java.project.sourcePaths": [],
   "breadcrumbs.showVariables": true,
   "outline.showVariables": true
 }
