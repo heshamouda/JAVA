@@ -1,0 +1,42 @@
+.root {
+    -fx-background-color: #EEEEEE;
+    -fx-border-radius: .5em;
+    -fx-start-margin: 0;
+    -fx-end-margin: auto;
+    -fx-padding: 32px 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 2, 0.3), 10, 0, 4, 4);
+    -fx-hgap: 1em;
+    -fx-vgap: 1em;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-size: 16px;
+}
+
+.button {
+    -fx-background-color: #EEEEEE;
+    -fx-min-width: 60px;
+    -fx-min-height: 60px;
+    -fx-border-radius: 50%;
+    -fx-text-align: center;
+    -fx-background-radius: 5em;
+    -fx-text-fill: black;
+}
+
+
+
+#zero-button {
+    -fx-background-radius: 10px;
+}
+
+#orange-button {
+    -fx-text-fill: orange;
+}
+
+#action-button{
+-fx-text-fill: gray;
+}
+
+.label {
+    -fx-min-height: 150px;
+    -fx-font-size: 45pt;
+    /*-fx-text-alignment: right;*/
+}
