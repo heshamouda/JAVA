@@ -26,9 +26,8 @@ public class ClacUi extends GridPane {
         layoutControls();
     }
 
-    private void layoutControls() {
+    private void intializeControls() {
         for (int i = 0; i < 10; i++) {
-
             numberButtons.add(createButton(String.valueOf(i)));
 
             dot = createButton(".");
@@ -43,8 +42,11 @@ public class ClacUi extends GridPane {
 
             display = new Label("0");
             display.setMaxWidth(Double.MAX_VALUE);
-
         }
+    }
+
+    private void layoutControls() {
+
     }
 
     private Button createButton(String textString) {
@@ -53,9 +55,6 @@ public class ClacUi extends GridPane {
         btn.setMaxHeight(Double.MAX_VALUE);
 
         return btn;
-    }
-
-    private void intializeControls() {
     }
 
 }
