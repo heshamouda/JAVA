@@ -5,6 +5,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 
+/*
+ * created by @Hesham Ouda
+ * on 30.10.2022
+ */
+
 public class BorderPaneTemplate extends BorderPane {
     private Button   topButton;
     private Button   bottomButton;
