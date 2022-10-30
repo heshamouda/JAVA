@@ -15,7 +15,7 @@ public class CalculatorApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         CalculatorUI cui = new CalculatorUI();
-        Group circles = cui.getCircles();
+        //Group circles = cui.getCircles();
 //        Parent rootPanel = new CalculatorUI();
 
         Scene scene = new Scene(cui);
