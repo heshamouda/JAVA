@@ -7,15 +7,16 @@ public class ApplicationUI extends StackPane {
     private Button btn1;
 
     public ApplicationUI() {
-        initializecontrols();
+        initializeControls();
         layoutControls();
     }
 
-    private void layoutControls() {
+    private void initializeControls() {
+
         btn1 = new Button("Hellow World");
     }
 
-    private void initializecontrols() {
+    private void layoutControls() {
         getChildren().add(btn1);
     }
 

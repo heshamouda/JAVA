@@ -10,6 +10,7 @@ public class Starter extends Application {
     @Override
     public void start(Stage primaryStage) {
         Parent rootPane = new ApplicationUI();
+
         Scene myScene = new Scene(rootPane);
 
         primaryStage.setTitle("JavaFX Template");
@@ -21,7 +22,5 @@ public class Starter extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
     }
-
 }
